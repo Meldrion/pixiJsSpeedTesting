@@ -55,6 +55,9 @@
         renderer.render(stage);
     }
 
+    /**
+     * Build the Tilemap
+     */
     function buildTileMap() {
 
         stage.removeChildren(0, stage.children.length);
@@ -72,17 +75,30 @@
                 tile.anchor.y = 0;
                 tile.position.x = cellSize * i;
                 tile.position.y = cellSize * j;
-                tile.
+                tile.width = cellSize;
+                tile.height = cellSize;
 
-                var tile2 = new PIXI.Sprite(texture03);
+                var tile2 = new PIXI.Sprite(texture02);
 
                 tile2.anchor.x = 0;
                 tile2.anchor.y = 0;
                 tile2.position.x = cellSize * i;
                 tile2.position.y = cellSize * j;
+                tile2.width = cellSize;
+                tile2.height = cellSize;
+
+                var tile3 = new PIXI.Sprite(texture03);
+
+                tile3.anchor.x = 0;
+                tile3.anchor.y = 0;
+                tile3.position.x = cellSize * i;
+                tile3.position.y = cellSize * j;
+                tile3.width = cellSize;
+                tile3.height = cellSize;
 
                 stage.addChild(tile);
                 stage.addChild(tile2);
+                stage.addChild(tile3);
 
             }
         }
