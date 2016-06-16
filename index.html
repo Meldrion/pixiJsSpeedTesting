@@ -1,0 +1,108 @@
+<html>
+<head>
+    <title>pixi.js example 1</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #FFFFFF;
+        }
+    </style>
+    <script src="include/javascript/pixi/pixi.js"></script>
+</head>
+<body>
+
+<script>
+    // create an new instance of a pixi stage
+    var stage = new PIXI.Stage(0x66FF99);
+
+    // create a renderer instance.
+    var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight);
+
+    // add the renderer view element to the DOM
+    document.body.appendChild(renderer.view);
+
+    requestAnimationFrame(animate);
+    // create a texture from an image path
+    var texture01 = PIXI.Texture.fromImage("resource/image/tile01.png");
+    var texture02 = PIXI.Texture.fromImage("resource/image/tile02.png");
+    var texture03 = PIXI.Texture.fromImage("resource/image/tile03.png");
+
+    /*
+     // create a new Sprite using the texture
+     var tile01 = new PIXI.Sprite(texture01);
+     // center the sprites anchor point
+     tile01.anchor.x = 0.0;
+     tile01.anchor.y = 0.0;
+
+     // move the sprite t the center of the screen
+     tile01.position.x = 0;
+     tile01.position.y = 0;
+
+     stage.addChild(tile01);
+     */
+
+    buildTileMap();
+
+    function animate() {
+
+        requestAnimationFrame(animate);
+        /*
+         // just for fun, lets rotate mr rabbit a little
+         tileset.rotation += 0.1;
+         */
+        // render the stage
+        renderer.render(stage);
+    }
+
+    function buildTileMap() {
+
+        stage.removeChildren(0, stage.children.length);
+
+        var w = window.innerWidth;;
+        var h = window.innerHeight;
+        var cellSize = 32;
+
+        for (var i = 0; i < w / cellSize; i++) {
+            for (var j = 0; j < h / cellSize; j++) {
+
+                var tile = new PIXI.Sprite(texture01);
+
+                tile.anchor.x = 0;
+                tile.anchor.y = 0;
+                tile.position.x = cellSize * i;
+                tile.position.y = cellSize * j;
+                tile.
+
+                var tile2 = new PIXI.Sprite(texture03);
+
+                tile2.anchor.x = 0;
+                tile2.anchor.y = 0;
+                tile2.position.x = cellSize * i;
+                tile2.position.y = cellSize * j;
+
+                stage.addChild(tile);
+                stage.addChild(tile2);
+
+            }
+        }
+
+    }
+
+    window.onresize = function (event){
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+
+        //this part resizes the canvas but keeps ratio the same
+        renderer.view.style.width = w + "px";
+        renderer.view.style.height = h + "px";
+
+        //this part adjusts the ratio:
+        renderer.resize(w,h);
+        buildTileMap();
+    }
+
+</script>
+
+</body>
+</html>
