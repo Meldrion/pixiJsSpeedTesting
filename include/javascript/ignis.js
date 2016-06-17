@@ -33,6 +33,8 @@ var texture04 = PIXI.Texture.fromImage("resource/image/cave.png");
 var tile4 = new PIXI.Sprite(texture04);
 
 var mousePosition;
+var cellSize = 32;
+
 
 var stats = new Stats();
 document.body.appendChild( stats.domElement );
@@ -50,9 +52,7 @@ var cursor = new PIXI.Graphics();
 cursor.beginFill(0xe74c3c); // Red
 cursor.drawRect(0,0,32,32);
 cursor.endFill();
-
-
-
+cursor.alpha = 0.75;
 buildTileMap();
 
 
@@ -82,7 +82,6 @@ function buildTileMap() {
 
     stage.removeChildren(0, stage.children.length);
 
-    var cellSize = 128;
     cursor.width = cellSize;
     cursor.height = cellSize;
 
@@ -128,11 +127,10 @@ function buildTileMap() {
             stage.addChild(tile2);
             stage.addChild(tile3);
 
-
         }
     }
 
-    stage.addChild(tile4);
+    //stage.addChild(tile4);
     stage.addChild(cursor);
 }
 
@@ -155,6 +153,12 @@ function clickEvent(event) {
 
 function moveEvent(event) {
     mousePosition = event.data.global;
-    cursor.x = mousePosition.x;
-    cursor.y = mousePosition.y;
+
+    var posX = Math.floor(mousePosition.x / cellSize) * cellSize;
+    var posY = Math.floor(mousePosition.y / cellSize) * cellSize;
+
+    if (posX != cursor.x || posY != cursor.y) {
+        cursor.x = posX;
+        cursor.y = posY;
+    }
 }
