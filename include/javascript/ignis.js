@@ -10,7 +10,7 @@ stage.interactive = true;
 stage.on('mousedown', clickEvent);
 stage.on('touchstart', clickEvent);
 stage.on("mousemove",moveEvent);
-
+stage.on("mousewheel", function() {console.log("Hello World")});
 /*
 stage.onmousemove = function() {
     console.log("MOVE !");
@@ -44,6 +44,15 @@ tile4.anchor.y = 0.5;
 tile4.position.x = 500;
 tile4.position.y = 500;
 
+// Initialize the pixi Graphics class
+var cursor = new PIXI.Graphics();
+// Set the fill color
+cursor.beginFill(0xe74c3c); // Red
+cursor.drawRect(0,0,32,32);
+cursor.endFill();
+
+
+
 buildTileMap();
 
 
@@ -60,6 +69,7 @@ function animate() {
         tile4.rotation += 0.1;
     }
 
+
     // render the stage
     renderer.render(stage);
     stats.end();
@@ -73,6 +83,8 @@ function buildTileMap() {
     stage.removeChildren(0, stage.children.length);
 
     var cellSize = 128;
+    cursor.width = cellSize;
+    cursor.height = cellSize;
 
     var w = window.innerWidth;
     var h = window.innerHeight;
@@ -121,6 +133,7 @@ function buildTileMap() {
     }
 
     stage.addChild(tile4);
+    stage.addChild(cursor);
 }
 
 window.onresize = function (event){
@@ -142,4 +155,6 @@ function clickEvent(event) {
 
 function moveEvent(event) {
     mousePosition = event.data.global;
+    cursor.x = mousePosition.x;
+    cursor.y = mousePosition.y;
 }
