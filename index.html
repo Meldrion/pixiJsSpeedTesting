@@ -8,15 +8,63 @@
                 padding: 0;
                 background-color: #FFFFFF;
             }
+
+            .customButtonIconButton {
+                margin-top:3px;
+                margin-left:2px;
+                width:24px;
+                height:24px;
+                background-repeat: no-repeat;
+                background-position: center;
+                display:inline-block;
+                position:relative;
+            }
+
+            .customButtonIconButton:hover {
+                background-color: #d7d7d7;
+                box-shadow: inset 0 0 0 1px #828282;
+            }
+
+            #newProjectButton {
+                background-image: url(resource/icon/Document-Blank-icon-16.png);
+            }
+
+            #loadProjectButton {
+                background-image: url(resource/icon/document-open-2.png);
+            }
+
+            #saveProjectButton {
+                background-image: url(resource/icon/Actions-document-save-icon.png);
+            }
+
+            #toolbar {
+                border-bottom: 1px solid #7f7f7f;
+                height: 30px;
+            }
         </style>
 
         <script src="include/javascript/pixi/pixi.js"></script>
         <script src="include/javascript/pixi/stats.min.js"></script>
+        <script>window.$ = window.jQuery = require('./include/javascript/jqueryUI/external/jquery/jquery.js');</script>
+        <script src="include/javascript/jqueryUI/jquery-ui.js"></script>
 
     </head>
 
     <body>
+        <div id="toolbar" class="ui-widget-header ui-corner-all">
+            <div id="newProjectButton" class="customButtonIconButton"></div>
+            <div id="loadProjectButton" class="customButtonIconButton"></div>
+            <div id="saveProjectButton" class="customButtonIconButton"></div>
+        </div>
+
         <script src="include/javascript/ignis.js"></script>
+        <script>
+            /* JQUERY WORKS FINALLY */
+            $(document).ready(function(){
+
+            });
+
+        </script>
     </body>
 
 </html>

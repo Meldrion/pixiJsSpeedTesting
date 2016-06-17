@@ -10,14 +10,10 @@ stage.interactive = true;
 stage.on('mousedown', clickEvent);
 stage.on('touchstart', clickEvent);
 stage.on("mousemove",moveEvent);
-stage.on("mousewheel", function() {console.log("Hello World")});
-/*
-stage.onmousemove = function() {
-    console.log("MOVE !");
-}*/
+
 
 // create a renderer instance.
-var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight,{antialias: false, transparent: false});
+var renderer = PIXI.autoDetectRenderer(window.innerWidth, getCanvasHeight(),{antialias: false, transparent: false});
 
 // add the renderer view element to the DOM
 document.body.appendChild(renderer.view);
@@ -37,7 +33,8 @@ var cellSize = 32;
 
 
 var stats = new Stats();
-document.body.appendChild( stats.domElement );
+//document.body.appendChild( stats.domElement );
+
 stats.domElement.style.position = "absolute";
 stats.domElement.style.top = "0px";
 
@@ -86,7 +83,7 @@ function buildTileMap() {
     cursor.height = cellSize;
 
     var w = window.innerWidth;
-    var h = window.innerHeight;
+    var h = getCanvasHeight();
 
     var maxX = w / cellSize;
     var maxY = h / cellSize;
@@ -136,7 +133,7 @@ function buildTileMap() {
 
 window.onresize = function (event){
     var w = window.innerWidth;
-    var h = window.innerHeight;
+    var h = getCanvasHeight();
 
     //this part resizes the canvas but keeps ratio the same
     renderer.view.style.width = w + "px";
@@ -161,4 +158,12 @@ function moveEvent(event) {
         cursor.x = posX;
         cursor.y = posY;
     }
+}
+
+function getCanvasWidth() {
+    return 0;
+}
+
+function getCanvasHeight() {
+    return window.innerHeight - 32; //- $("#toolbar").height;
 }
