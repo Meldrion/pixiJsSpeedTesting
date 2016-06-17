@@ -3,6 +3,7 @@
         <title>Pixi Render Speed Test</title>
 
         <style>
+
             body {
                 margin: 0;
                 padding: 0;
@@ -41,10 +42,28 @@
                 border-bottom: 1px solid #7f7f7f;
                 height: 30px;
             }
+
+            #leftBar {
+                width:280px;
+                height: calc(100vh - 31px);
+                display: inline-block;
+                border-right: 1px solid #7f7f7f;
+            }
+
+            #canvas {
+                display: inline-block;
+                float:left;
+                position:absolute;
+                left:281px;
+                overflow: hidden;
+                overflow-x: hidden;
+                overflow-y: hidden;
+                margin: 0; padding: 0;
+
+            }
+
         </style>
 
-        <script src="include/javascript/pixi/pixi.js"></script>
-        <script src="include/javascript/pixi/stats.min.js"></script>
         <script>window.$ = window.jQuery = require('./include/javascript/jqueryUI/external/jquery/jquery.js');</script>
         <script src="include/javascript/jqueryUI/jquery-ui.js"></script>
 
@@ -57,11 +76,28 @@
             <div id="saveProjectButton" class="customButtonIconButton"></div>
         </div>
 
-        <script src="include/javascript/ignis.js"></script>
-        <script>
-            /* JQUERY WORKS FINALLY */
-            $(document).ready(function(){
+        <div id="leftBar">
 
+        </div>
+
+
+        <iframe id="canvas" src="include/canvas.html">
+
+        </iframe>
+
+        <script>
+
+            /* JQUERY WORKS FINALLY */
+            $(document).ready(function() {
+
+                $("#canvas").width(window.innerWidth - 281);
+                $("#canvas").height(window.innerHeight - 31);
+
+
+                $( window ).resize(function() {
+                    $("#canvas").width(window.innerWidth - 281);
+                    $("#canvas").height(window.innerHeight - 31);
+                });
             });
 
         </script>
