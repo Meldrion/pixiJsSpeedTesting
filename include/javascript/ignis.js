@@ -7,8 +7,14 @@
 var stage = new PIXI.Stage(0x66FF99);
 stage.interactive = true;
 
-stage.on('mousedown', click);
-stage.on('touchstart', click);
+stage.on('mousedown', clickEvent);
+stage.on('touchstart', clickEvent);
+stage.on("mousemove",moveEvent);
+
+/*
+stage.onmousemove = function() {
+    console.log("MOVE !");
+}*/
 
 // create a renderer instance.
 var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight,{antialias: false, transparent: false});
@@ -26,6 +32,8 @@ var texture04 = PIXI.Texture.fromImage("resource/image/cave.png");
 
 var tile4 = new PIXI.Sprite(texture04);
 
+var mousePosition;
+
 var stats = new Stats();
 document.body.appendChild( stats.domElement );
 stats.domElement.style.position = "absolute";
@@ -35,6 +43,8 @@ tile4.anchor.x = 0.5;
 tile4.anchor.y = 0.5;
 tile4.position.x = 500;
 tile4.position.y = 500;
+
+buildTileMap();
 
 
 function animate() {
@@ -62,7 +72,7 @@ function buildTileMap() {
 
     stage.removeChildren(0, stage.children.length);
 
-    var cellSize = 32;
+    var cellSize = 128;
 
     var w = window.innerWidth;
     var h = window.innerHeight;
@@ -100,10 +110,12 @@ function buildTileMap() {
             tile3.position.y = cellSize * j;
             tile3.width = cellSize;
             tile3.height = cellSize;
+            tile3.alpha = 0.5;
 
             stage.addChild(tile);
             stage.addChild(tile2);
             stage.addChild(tile3);
+
 
         }
     }
@@ -124,7 +136,10 @@ window.onresize = function (event){
     buildTileMap();
 }
 
-function click(event) {
-    var point;
-    console.log("CLICK ! @ " + event.data.getGlobalPosition(point));
+function clickEvent(event) {
+    console.log("Mouse Click @ {X:" + mousePosition.x + " Y:" + mousePosition.y +"}");
+}
+
+function moveEvent(event) {
+    mousePosition = event.data.global;
 }
