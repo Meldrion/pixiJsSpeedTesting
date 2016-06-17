@@ -18,7 +18,7 @@
     var stage = new PIXI.Stage(0x66FF99);
 
     // create a renderer instance.
-    var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight);
+    var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight,{antialias: false, transparent: false});
 
     // add the renderer view element to the DOM
     document.body.appendChild(renderer.view);
@@ -70,7 +70,7 @@
 
         if (tile4 != null) {
             console.log(this.deltaTime);
-            tile4.rotation += this.deltaTime / 10.0;
+            tile4.rotation += 0.1;
         }
 
         // render the stage
@@ -87,7 +87,7 @@
 
         var w = window.innerWidth;
         var h = window.innerHeight;
-        var cellSize = 32;
+        var cellSize = 64;
 
         for (var i = 0; i < w / cellSize; i++) {
             for (var j = 0; j < h / cellSize; j++) {
@@ -127,7 +127,7 @@
             }
         }
 
-        //stage.addChild(tile4);
+        stage.addChild(tile4);
     }
 
     window.onresize = function (event){
