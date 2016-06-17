@@ -1,0 +1,22 @@
+{
+  "name": "pixitesting",
+  "version": "1.0.0",
+  "description": "",
+  "main": "include/javascript/main.js",
+  "scripts": {
+    "start":"electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Meldrion/pixiJsSpeedTesting.git"
+  },
+  "author": "Fabien Steines",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Meldrion/pixiJsSpeedTesting/issues"
+  },
+  "homepage": "https://github.com/Meldrion/pixiJsSpeedTesting#readme",
+  "devDependencies": {
+    "electron-prebuilt": "^1.2.3"
+  }
+}
