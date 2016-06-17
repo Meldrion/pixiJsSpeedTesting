@@ -9,6 +9,7 @@
         }
     </style>
     <script src="include/javascript/pixi/pixi.js"></script>
+    <script src="include/javascript/pixi/stats.min.js"></script>
 </head>
 <body>
 
@@ -31,6 +32,11 @@
     var texture04 = PIXI.Texture.fromImage("resource/image/cave.png");
 
     var tile4 = new PIXI.Sprite(texture04);
+
+    var stats = new Stats();
+    document.body.appendChild( stats.domElement );
+    stats.domElement.style.position = "absolute";
+    stats.domElement.style.top = "0px";
 
     tile4.anchor.x = 0.5;
     tile4.anchor.y = 0.5;
@@ -55,6 +61,7 @@
 
     function animate() {
 
+        stats.begin();
         requestAnimationFrame(animate);
         /*
          // just for fun, lets rotate mr rabbit a little
@@ -62,11 +69,13 @@
          */
 
         if (tile4 != null) {
-            tile4.rotation += 0.1;
+            console.log(this.deltaTime);
+            tile4.rotation += this.deltaTime / 10.0;
         }
 
         // render the stage
         renderer.render(stage);
+        stats.end();
     }
 
     /**
@@ -76,9 +85,9 @@
 
         stage.removeChildren(0, stage.children.length);
 
-        var w = window.innerWidth;;
+        var w = window.innerWidth;
         var h = window.innerHeight;
-        var cellSize = 16;
+        var cellSize = 32;
 
         for (var i = 0; i < w / cellSize; i++) {
             for (var j = 0; j < h / cellSize; j++) {
@@ -91,6 +100,7 @@
                 tile.position.y = cellSize * j;
                 tile.width = cellSize;
                 tile.height = cellSize;
+                tile.tint = 0x999999;
 
                 var tile2 = new PIXI.Sprite(texture02);
 
@@ -117,7 +127,7 @@
             }
         }
 
-        stage.addChild(tile4);
+        //stage.addChild(tile4);
     }
 
     window.onresize = function (event){
